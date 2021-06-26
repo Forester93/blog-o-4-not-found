@@ -131,6 +131,10 @@ footer {
 .logo-2 {
   color: var(--themeColor3);
 }
+
+.min-height-85 {
+  min-height: 85vh;
+}
 /* ======================  Profile page styling ====================== */
 
 @media (min-width: 600px) {

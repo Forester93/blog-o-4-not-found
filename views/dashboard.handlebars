@@ -1,5 +1,5 @@
 
-<section >
+<section class="min-height-85" >
   <div class="container align-items-center">
   <div class="logo">Blog <span>O4</span> ... Write Away</div>
   <h5 class="text-light my-3">Welcome back, {{account.username}}</h5>
@@ -11,7 +11,7 @@
           <div class="card-body" >
             <p class="card-text">Your unique content goes here... Write away.</p>
             <p class="text-muted">- {{account.username}}</p>
-            <button class="addEntry" id="launchEntry" data-toggle="modal" data-target="#entryModal">📜 Add Entry</button>
+            <button class="launchEntry" data-toggle="modal" data-target="#entryModal">📜 Add Entry</button>
           </div>
         </div>
     {{#if userEntriesData}}

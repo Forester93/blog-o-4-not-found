@@ -79,6 +79,10 @@ router.get("/login", (req, res) => {
 router.get("/dashboard", withAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
+    const accountData = await Account.findByPk(req.session.account_id, {
+      attributes: { exclude: ["password"] },
+    });
+    let account = accountData.get({ plain: true });
     const accountEntries = await Entry.findAll({
       include: [
         {
@@ -90,25 +94,30 @@ router.get("/dashboard", withAuth, async (req, res) => {
       // join other table data here later
     });
     console.log(accountEntries);
-    const userEntriesData = accountEntries.map((item) => {
-      return {
-        id: item.dataValues.id,
-        title: item.dataValues.title,
-        content: item.dataValues.content,
-        date: item.dataValues.date,
-        account: {
-          username: item.dataValues.account.username,
-          id: item.dataValues.account.id,
-        },
-      };
-    });
+    if (!accountEntries) {
+      res.render("dashboard", {
+        layout: "main",
+        account: account,
+        logged_in: true,
+      });
+    } else {
+      const userEntriesData = accountEntries.map((item) => {
+        return {
+          id: item.dataValues.id,
+          title: item.dataValues.title,
+          content: item.dataValues.content,
+          date: item.dataValues.date,
+          account,
+        };
+      });
 
-    res.render("dashboard", {
-      layout: "main",
-      account: userEntriesData[0].account,
-      userEntriesData,
-      logged_in: true,
-    });
+      res.render("dashboard", {
+        layout: "main",
+        account,
+        userEntriesData,
+        logged_in: true,
+      });
+    }
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

@@ -56,7 +56,7 @@ router.post("/create", async (req, res) => {
   try {
     const accountInfo = await Account.create(req.body);
     let account = accountInfo.get({ plain: true });
-    console.log(account);
+    // console.log(account);
 
     req.session.save(() => {
       req.session.account_id = account.id;
