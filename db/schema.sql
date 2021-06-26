@@ -1,0 +1,3 @@
+DROP DATABASE IF EXISTS blogo4db;
+CREATE DATABASE blogo4db;
+USE blogo4db;
