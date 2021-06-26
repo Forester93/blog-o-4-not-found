@@ -64,7 +64,7 @@ router.post("/create", async (req, res) => {
       req.session.account_id = account.id;
       req.session.logged_in = true;
     });
-    res.status(200).json("Account created!").redirect("../../profile");
+    res.status(200).json("Account created!").redirect("../../dashboard");
   } catch (err) {
     res.status(400).send(err);
   }

@@ -10,8 +10,8 @@ const logout = async () => {
   });
 
   if (response.ok) {
-    document.location.replace("/");
-    alert("Log out Successfully");
+    alert("Successfully Logged Out");
+    document.location.replace("/home");
   } else {
     alert(response.statusText);
   }

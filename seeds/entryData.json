@@ -19,5 +19,12 @@
     "content": "Although bootstrap makes it very easy to style an HTML page, some people still prefer to use raw CSS to add flavour to their pages.",
     "date": "12/03/2021",
     "account_id": 3
+  },
+  {
+    "id": 4,
+    "title": "MySQL",
+    "content": "MySQL provides a design-first structured query system to store, retrieve, relate and analyse your data.",
+    "date": "13/03/2021",
+    "account_id": 1
   }
 ]

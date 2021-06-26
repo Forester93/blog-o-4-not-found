@@ -1,0 +1,32 @@
+
+<section class="user align-items-center">
+  <div class="logo">Blog <span>O4</span> ... Code Away</div>
+  <h6>Welcome back, {{account.username}}</h6>
+
+  <div class="box-2">
+            {{#each userEntriesData}}
+            {{> userEntries-details}}
+            {{/each}}
+  </div>
+
+
+</section>
+
+
+
+
+{{> alert-modal}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

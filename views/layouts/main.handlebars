@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Thy Will - Your Popular Will Drafting Tool</title>
+    <title>BlogO4 - (Not) Found</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -19,6 +19,22 @@
     {{!-- <script data-ad-client="ca-pub-2679577236751743" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> --}}
   </head>
   <body>
+    <header class="header">
+      
+        {{!-- <div class="text">
+          Blog04 - ("Not") Found
+        </div> --}}
+        <ul class="menu">
+          <li><a href="/home" class="menu-btn">Home</a></li>
+          <li><a href="/dashboard" class="menu-btn">Dashboard</a></li>
+          <li><a href="/about" class="menu-btn">About</a></li>
+          {{#if logged_in}}
+          <li><a id="logout">Logout</a></li>
+          {{/if}}
+        </ul>
+        
+      
+    </header>
     <main>
       {{{body}}}
     </main>
@@ -27,7 +43,6 @@
       <span>Created By NewCorp Solutions | <span class="far fa-copyright"></span> 2021 All rights reserved.</span>
     </footer>
   </body>
-    <script src="/assets/scripts/typing.js"></script>
     {{#if logged_in}}
     <script src="/assets/scripts/logout.js"></script>
     {{/if}}
