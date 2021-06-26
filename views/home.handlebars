@@ -1,0 +1,43 @@
+<header class="header">
+      
+        <div class="text">
+          Blog04 - ("Not") Found
+        </div>
+        <ul class="menu">
+          <li><a href="/home" class="menu-btn">Home</a></li>
+          <li><a href="/about" class="menu-btn">About</a></li>
+          {{!-- <li><a href="#" class="menu-btn">Guide</a></li> --}}
+          {{!-- <li><a href="#" class="menu-btn">Testimonials</a></li> --}}
+          
+        </ul>
+        
+      
+    </header>
+    
+    <!-- home section start -->
+    <section class="home" id="home">
+      <div class="max-width">
+        <div class="home-content">
+          <div class="text-1">Welcome to</div>
+          <div class="logo-2">Blog<span>O4</span></div>
+          <div class="text-2">Your Goto Nerdy Techie Hub</div>
+          {{!-- <div class="text-2">We are <span class="typing"></span></div> --}}
+          <div>
+            <button id="startBtn" data-toggle="modal" data-target="#signUpModal"><i class="fas fa-pen-fancy"></i> Get Started</button>
+            <button id="modalBtn" data-toggle="modal" data-target="#loginModal"><i class="fas fa-sign-in-alt"></i></i> Account</button>
+          </div>  
+        </div>
+      </div>
+    </section>
+
+{{> login-modal}}
+
+{{> signup-modal}}
+
+{{> alert-modal}}
+
+
+    <script src="/assets/scripts/login.js"></script>
+    {{#if logged_in}}
+    <script src="/assets/scripts/logout.js"></script>
+    {{/if}}

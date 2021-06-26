@@ -1,0 +1,143 @@
+<header id="userHeader" class="header" user-id={{account.id}}>
+  <div class="welcome">Welcome back!</div>
+  <ul class="menu">
+    <li class="dropdown" style="float:left;">
+      {{!-- <a href="#">Options</a>
+      <div class="dropdown-content" style="left:0;">
+        <button><i class="fas fa-envelope-square"> Email</i></button>
+        <button><i class="fas fa-download"> Download</i></button>
+        <button><i class="fas fa-share-alt-square"> Share</i></button>
+      </div> --}}
+    </li>
+    <li><a href="/api/pdf/" target="_blank">Preview</a></li>
+    <li><a href="/" id="logout">Logout</a></li>
+  </ul>
+</header>
+
+<section class="user align-items-center">
+  <div class="logo">Thy<span>Will</span></div>
+
+
+  {{!-- <h2 class="title">Your Will is <span class="status">in Progress</span></h2> --}}
+
+  <div class="box-2">
+    <div class="max-width">
+      <div class="carousel 
+      owl-carousel
+      ">
+        <div class="card" id="userCard">
+            <div class="box-head">
+              {{#if user.gender}}
+              <img src="/assets/images/users/oldman.jpg" alt="oldman">
+              <p id="currentUserGender" style="display: none;">true</p>
+              {{else}}
+              <img src="/assets/images/users/oldlady.jpg" alt="oldlady">
+              <p id="currentUserGender" style="display: none;">false</p>
+              {{/if}}
+              <div>
+                <strong>Will owner:</strong>
+                <p id="currentUserName">{{user.name}}</p>
+              </div>
+            </div>
+            <p><strong>Email:</strong>
+               {{!-- <a href="mailto:{{email}}"> --}}
+                 {{account.email}}
+                 {{!-- </a> --}}
+                 </p>
+            <p><strong>D.O.B:</strong></p>
+            <p id="currentUserDOB">{{user.DOB}}</p>
+            <p><strong>Address:</strong></p>
+            <p id="currentUserAddress">{{user.address}}</p>
+            <p><strong>Occupation:</strong></p>
+            <p id="currentUserOccupation">{{user.occupation}}</p>
+            <p><strong>Casket Instructions:</strong></p>
+            <p id="currentUserCasket">{{user.casket}}</p>
+            <p><strong>Ceremonial Instructions:</strong></p>
+            <p id="currentUserCeremony">{{user.ceremony}}</p>
+            <button id="editUser" data-toggle="modal" data-target="#userModal">Edit</button>
+        </div>
+        
+        <div class="card" id="beneficiariesCard">
+          <h3 class="num">1</h3>
+          <h4>Benificiaries</h4>
+          <p>Individuals and/or organisations to inherit.</p>
+          <div class="w-100 part-1-list" id="part-1-list">
+            {{#each beneficiaries}}
+            {{> beneficiary-details}}
+            {{/each}}
+          </div>
+          <button data-toggle="modal" data-target="#beneficiaryModal" id="launchBeneficiary"><i class="fas fa-plus"></i></button>
+        </div>
+
+        <div class="card" id="executorsCard">
+          <h3 class="num">2</h3>
+          <h4>Executors</h4>
+          <p>The ones to execute your will.</p>
+          {{#each executors}}
+          {{> executor-details}}
+          {{/each}}
+          <button data-toggle="modal" data-target="#executorModal" id="launchExecutor"><i class="fas fa-plus"></i></button>
+        </div>
+
+        <div class="card" id="assetsCard">
+          <h3 class="num">3</h3>
+          <h4>Asset</h4>
+          <p>A list of your major Assets.</p>
+          {{#each assets}}
+          {{> asset-details}}
+          {{/each}}
+          <button data-toggle="modal" data-target="#assetModal" id="launchAsset"><i class="fas fa-plus"></i></button>
+
+        </div>
+        <div class="card" id="assetApportionsCard">
+          <h3 class="num">4</h3>
+          <h4>Assets Apportioning</h4>
+          <p>Set up percentages for each benificiary.</p>
+          {{#each assetApportions}}
+          {{> assetApportion-details}}
+          {{/each}}
+          <button data-toggle="modal" data-target="#assetApportionModal" id="launchAssetApportion"><i class="fas fa-plus"></i></button>
+
+        </div>
+        <div class="card" id="witnessesCard">
+          <h3 class="num">5</h3>
+          <h4>Witness</h4>
+          <p>Basic info of your nominated Witness</p>
+          {{#each witnesses}}
+          {{> witness-details}}
+          {{/each}}
+          <button data-toggle="modal" data-target="#witnessModal" id="launchWitness"><i class="fas fa-plus"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{{> beneficiary-modal}}
+  
+{{> executor-modal}}
+
+{{> asset-modal}}
+
+{{> witness-modal}}
+
+{{> user-modal}}
+
+{{> assetApportion-modal}}
+
+{{> alert-modal}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
