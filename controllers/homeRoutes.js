@@ -14,15 +14,40 @@ router.get("/", (req, res) => {
   // });
 });
 
-router.get("/home", (req, res) => {
+router.get("/home", async (req, res) => {
   let logged_in = false;
   if (req.session.logged_in) {
     logged_in = true;
   }
-  res.render("home", {
-    layout: "main",
-    logged_in,
-  });
+  try {
+    const entries = await Entry.findAll({
+      include: [
+        {
+          model: Account,
+          attributes: { exclude: ["password"] },
+        },
+      ],
+    });
+    // const allUserEntries = UserEntries.get({ plain: true });
+    const allUserEntries = entries.map((item) => {
+      return {
+        id: item.dataValues.id,
+        title: item.dataValues.title,
+        content: item.dataValues.content,
+        date: item.dataValues.date,
+        account: { username: item.dataValues.account.username },
+      };
+    });
+    console.log(allUserEntries);
+    res.render("home", {
+      layout: "main",
+      allUserEntries,
+      logged_in,
+    });
+  } catch (err) {
+    console.log(err);
+    res.send(err);
+  }
 });
 
 router.get("/about", (req, res) => {
@@ -51,27 +76,35 @@ router.get("/login", (req, res) => {
 router.get("/dashboard", withAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
-    const accountData = await Account.findByPk(req.session.account_id, {
-      attributes: { exclude: ["password"] },
+    const accountEntries = await Entry.findAll({
       include: [
         {
-          model: Entry,
+          model: Account,
+          attributes: { exclude: ["password"] },
+          where: { id: req.session.account_id },
         },
       ],
       // join other table data here later
     });
-
-    const userEntriesData = accountData.get({ plain: true }).entries;
-    account = accountData.get({ plain: true });
-    console.log(userEntriesData);
+    console.log(accountEntries);
+    const userEntriesData = accountEntries.map((item) => {
+      return {
+        id: item.dataValues.id,
+        title: item.dataValues.title,
+        content: item.dataValues.content,
+        date: item.dataValues.date,
+        account: { username: item.dataValues.account.username },
+      };
+    });
 
     res.render("dashboard", {
       layout: "main",
-      account,
+      account: userEntriesData[0].account,
       userEntriesData,
       logged_in: true,
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });

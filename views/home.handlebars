@@ -12,13 +12,22 @@
               {{else}}
                 <div>
                   <button id="startBtn" data-toggle="modal" data-target="#signUpModal"><i class="fas fa-pen-fancy"></i> Sign Up</button>
-                  <button id="modalBtn" data-toggle="modal" data-target="#loginModal"><i class="fas fa-sign-in-alt"></i></i>Sign In</button>
+                  <button id="modalBtn" data-toggle="modal" data-target="#loginModal"><i class="fas fa-sign-in-alt"></i></i> Sign In</button>
                 </div>  
               {{/if}}
         </div>
       </div>
     </section>
 
+<section class="user align-items-center">
+  <div class="box-2">
+            {{#each allUserEntries}}
+            {{> allUserEntries-details}}
+            {{/each}}
+  </div>
+
+
+</section>
 
 
 {{> login-modal}}

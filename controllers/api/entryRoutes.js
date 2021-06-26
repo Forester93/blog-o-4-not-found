@@ -4,7 +4,14 @@ const { Entry, Account } = require("../../models");
 // The `/api/entries` endpoint
 router.get("/", async (req, res) => {
   try {
-    const entries = await Entry.findAll({});
+    const entries = await Entry.findAll({
+      include: [
+        {
+          model: Account,
+          attributes: { exclude: ["password"] },
+        },
+      ],
+    });
     // entries = entries.get({ plain: true });
     res.status(200).send(entries);
   } catch (err) {
@@ -23,7 +30,7 @@ router.get("/:id", async (req, res) => {
       attributes: { exclude: ["password"] },
     });
 
-    // entries = entries.get({ plain: true });
+    entries = entries.get({ plain: true });
 
     if (!entries) {
       res.status(404).send("Record not found!");
