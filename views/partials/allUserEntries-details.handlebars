@@ -4,6 +4,21 @@
     <p class="card-text">{{content}}</p>
     <p class="text-muted">- {{account.username}}</p>
   </div>
+{{#if comments}}
+    <div class="container my-2">
+    <ol class="list-group list-group-numbered">
+        {{#each comments}}
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+            <strong class="fw-bold">{{username}}</strong>
+            {{comment}}
+            </div>
+            <span class="badge bg-primary rounded-pill">{{date}}</span>
+        </li>
+        {{/each}}
+    </ol>
+    </div>
+{{/if}}
     <div class="card-footer text-muted">
     {{date}}
   </div>

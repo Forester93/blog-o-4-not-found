@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "comment": "Very helpful. Thanks :-)",
+    "date": "10/02/2021",
+    "account_id": 3,
+    "entry_id": 1
+  },
+  {
+    "id": 2,
+    "comment": "I believe so.",
+    "date": "11/02/2021",
+    "account_id": 2,
+    "entry_id": 1
+  },
+  {
+    "id": 3,
+    "comment": "I love bootstrap!",
+    "date": "12/02/2021",
+    "account_id": 3,
+    "entry_id": 3
+  }
+]

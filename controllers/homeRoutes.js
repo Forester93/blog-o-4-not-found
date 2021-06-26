@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Account, Entry } = require("../models");
+const { Account, Entry, Comment } = require("../models");
 const withAuth = require("../utils/auth");
 
 // This is home route, If the user is already logged in, redirect to user's profile page
@@ -26,10 +26,25 @@ router.get("/home", async (req, res) => {
           model: Account,
           attributes: { exclude: ["password"] },
         },
+        {
+          model: Comment,
+          include: [{ model: Account, attributes: { include: ["username"] } }],
+        },
       ],
     });
     // const allUserEntries = UserEntries.get({ plain: true });
     const allUserEntries = entries.map((item) => {
+      let comments = [];
+      if (item.dataValues.comments) {
+        comments = item.dataValues.comments.map((commentData) => {
+          return {
+            comment: commentData.comment,
+            username: commentData.account.username,
+            date: commentData.date,
+          };
+        });
+      }
+      console.log(comments);
       return {
         id: item.dataValues.id,
         title: item.dataValues.title,
@@ -39,6 +54,7 @@ router.get("/home", async (req, res) => {
           username: item.dataValues.account.username,
           id: item.dataValues.account.id,
         },
+        comments,
       };
     });
     console.log(allUserEntries);
