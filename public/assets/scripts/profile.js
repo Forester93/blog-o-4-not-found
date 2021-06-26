@@ -5,7 +5,7 @@ function alert(text) {
 
 // const accountID = $("#userHeader").attr("user-id");
 // console.log(userID);
-// ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Beneficiary relevant codes ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+// ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Entry relevant codes ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 // %%%%%%%%%%%%%%%%%% Delete Handler %%%%%%%%%%%%%%%%%%
 const deleteEntry = async (event) => {
   event.stopPropagation();
@@ -28,129 +28,97 @@ const deleteEntry = async (event) => {
 $(".deleteEntry").on("click", deleteEntry);
 
 // %%%%%%%%%%%%%%%%%% Add Handler %%%%%%%%%%%%%%%%%%
-const addBeneficiary = async (event) => {
+const addEntry = async (event) => {
   event.preventDefault();
-  const name = $("#beneficiaryName").val();
-  const address = $("#beneficiaryAddress").val();
-  const relationship = $("#beneficiaryRelationship").val();
-  const DOB = $("#beneficiaryDOB").val();
-  const isChild = $("#beneficiaryIsChild").prop("checked");
-  const isCharity = $("#beneficiaryIsCharity").prop("checked");
-  const guardian_address = $("#beneficiaryGuardianAddress").val();
-  const guardian_name = $("#beneficiaryGuardianName").val();
-  // Prevent adding data with same name (Pending)
+  const title = $("#entryTitle").val();
+  const content = $("#entryContent").val();
   // Call this Backend Route with this method, but need to prevent null with if statement
-  if (name && address) {
-    const response = await fetch(`/api/beneficiary`, {
+  console.log({
+    title,
+    content,
+    date: new Date().toString(),
+  });
+  if (title && content) {
+    const response = await fetch(`/api/entries`, {
       method: "POST",
       body: JSON.stringify({
-        name,
-        address,
-        relationship,
-        DOB,
-        isChild,
-        isCharity,
-        guardian_address,
-        guardian_name,
+        title,
+        content,
+        date: Date().toString(),
       }),
       headers: {
         "Content-Type": "application/json",
       },
     });
     if (!response.ok) {
-      alert("Failed to add");
+      alert("Failed to add entry!");
     } else {
       location.reload();
     }
   }
 };
 
-$("#beneficiaryModalFooter").on("click", "#addBeneficiaryBtn", addBeneficiary);
+$("#entryModalFooter").on("click", "#addEntryBtn", addEntry);
 
 // %%%%%%%%%%%%%%%%%% Update Handler %%%%%%%%%%%%%%%%%%
-var beneficiaryIdClicked;
-const updateBeneficiary = async (event) => {
+var entryIdClicked;
+const updateEntry = async (event) => {
   event.preventDefault();
-  const name = $("#beneficiaryName").val();
-  const address = $("#beneficiaryAddress").val();
-  const relationship = $("#beneficiaryRelationship").val();
-  const DOB = $("#beneficiaryDOB").val();
-  const isChild = $("#beneficiaryIsChild").prop("checked");
-  const isCharity = $("#beneficiaryIsCharity").attr("checked");
-  const guardian_address = $("#beneficiaryGuardianAddress").val();
-  const guardian_name = $("#beneficiaryGuardianName").val();
+  const title = $("#entryTitle").val();
+  const content = $("#entryContent").val();
+  const date = new Date().toString();
   // Call this Backend Route with this method
-  const response = await fetch(`/api/beneficiary/${beneficiaryIdClicked}`, {
+  const response = await fetch(`/api/entries/${entryIdClicked}`, {
     method: "PUT",
     body: JSON.stringify({
-      name,
-      address,
-      relationship,
-      DOB,
-      isChild,
-      isCharity,
-      guardian_address,
-      guardian_name,
+      title,
+      content,
+      date,
     }),
     headers: {
       "Content-Type": "application/json",
     },
   });
   if (!response.ok) {
-    alert("Failed to update");
+    alert("Failed to update entry!");
   }
   location.reload();
 };
-$("#beneficiaryModalFooter").on(
-  "click",
-  "#updateBeneficiaryBtn",
-  updateBeneficiary
-);
+
+$("#entryModalFooter").on("click", "#updateEntryBtn", updateEntry);
 
 // Functions to switch Add or Update Modal
-const beneficiaryModalToUpdate = (event) => {
+const entryModalToUpdate = (event) => {
   // We need to get the target beneficiary id for update with this click
   let targetclicked = $(event.target);
-  beneficiaryObjClicked = JSON.parse(targetclicked.attr("data"));
-  beneficiaryIdClicked = beneficiaryObjClicked.id;
+  entryObjClicked = JSON.parse(targetclicked.parent().parent().attr("data"));
+  entryIdClicked = entryObjClicked.id;
   // Add some autocomplete for reviewing previous user input
-  $("#beneficiaryName").val(beneficiaryObjClicked.name);
-  $("#beneficiaryAddress").val(beneficiaryObjClicked.address);
-  $("#beneficiaryDOB").val(beneficiaryObjClicked.DOB);
-  $("#beneficiaryIsChild").attr("checked", beneficiaryObjClicked.isChild);
-  $("#beneficiaryIsCharity").attr("checked", beneficiaryObjClicked.isCharity);
-  $("#beneficiaryRelationship").val(beneficiaryObjClicked.relationship);
-  $("#beneficiaryGuardianName").val(beneficiaryObjClicked.guardian_name);
-  $("#beneficiaryGuardianAddress").val(beneficiaryObjClicked.guardian_address);
+  $("#entryTitle").val(entryObjClicked.title);
+  $("#entryContent").val(entryObjClicked.content);
   // Switch to Update Modal
-  $("#beneficiaryModalTitle").text("Update Beneficiary");
-  $("#beneficiaryModalFooter")
+  $("#entryModalTitle").text("Update Entry");
+  $("#entryModalFooter")
     .children(0)
-    .attr("id", "updateBeneficiaryBtn")
+    .attr("id", "updateEntryBtn")
     .text("Update");
 };
 
-const beneficiaryModalToAdd = () => {
+const entryModalToAdd = () => {
   // Clear out previous autocomplete
-  $("#beneficiaryName").val("");
-  $("#beneficiaryAddress").val("");
-  $("#beneficiaryDOB").val("");
-  $("#beneficiaryIsChild").attr("checked", false);
-  $("#beneficiaryIsCharity").attr("checked", false);
-  $("beneficiaryRelationship").val("");
-  $("#beneficiaryGuardianName").val("");
-  $("#beneficiaryGuardianAddress").val("");
+  $("#entryTitle").val("");
+  $("#entryContent").val("");
   // Switch to Add Modal
-  $("#beneficiaryModalTitle").text("Add Beneficiary");
-  $("#beneficiaryModalFooter")
+  $("#entryModalTitle").text("Add Entry");
+  $("#entryModalFooter")
     .children(0)
-    .attr("id", "addBeneficiaryBtn")
-    .text("Add");
+    .attr("id", "addEntryBtn")
+    .text("Add Entry");
 };
 
-$(".beneficiaryBtn").on("mouseover", beneficiaryModalToUpdate);
-$(".beneficiaryBtn").on("focus", beneficiaryModalToUpdate);
-$(".beneficiaryBtn").on("click", beneficiaryModalToUpdate);
-$("#launchBeneficiary").on("click", beneficiaryModalToAdd);
-$(".launchBeneficiary").on("mouseover", beneficiaryModalToAdd);
-$(".launchBeneficiary").on("focus", beneficiaryModalToAdd);
+$(".editEntry").on("mouseover", entryModalToUpdate);
+$(".editEntry").on("focus", entryModalToUpdate);
+$(".editEntry").on("click", entryModalToUpdate);
+$(".launchEntry").on("click", entryModalToAdd);
+// $("#launchEntry").on("mouseover", entryModalToAdd);
+// $("#launchEntry").on("focus", entryModalToAdd);

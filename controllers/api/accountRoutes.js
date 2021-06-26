@@ -1,8 +1,6 @@
 const router = require("express").Router();
 const { Account, Entry } = require("../../models");
 
-// Route to Get All
-
 router.post("/", async (req, res) => {
   try {
     const accountData = await Account.findOne({

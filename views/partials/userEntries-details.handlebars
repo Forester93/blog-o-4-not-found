@@ -1,10 +1,10 @@
-<div class="card"  data='{{{unobjectify this}}}'>
+<div class="card my-2"  data='{{{unobjectify this}}}'>
   <h5 class="card-header">{{title}}</h5>
   <div class="card-body" >
-    <h5 class="card-title">{{account.username}}</h5>
     <p class="card-text">{{content}}</p>
-    <button class="editEntry">Edit</button>
-    <button class="btn-danger deleteEntry">Delete</button>
+    <p class="text-muted">- {{account.username}}</p>
+    <button class="editEntry" data-toggle="modal" data-target="#entryModal">📝 Edit</button>
+    <button class="btn-danger deleteEntry px-2">💀 Delete</button>
   </div>
     <div class="card-footer text-muted">
     {{date}}

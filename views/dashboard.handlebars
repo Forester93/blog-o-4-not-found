@@ -1,14 +1,27 @@
 
 <section >
   <div class="container align-items-center">
-  <div class="logo">Blog <span>O4</span> ... Code Away</div>
-  <h6>Welcome back, {{account.username}}</h6>
+  <div class="logo">Blog <span>O4</span> ... Write Away</div>
+  <h5 class="text-light my-3">Welcome back, {{account.username}}</h5>
   </div>
 
   <div class="container">
+        <div class="card my-2" >
+          <h5 class="card-header">A great title goes here.</h5>
+          <div class="card-body" >
+            <p class="card-text">Your unique content goes here... Write away.</p>
+            <p class="text-muted">- {{account.username}}</p>
+            <button class="addEntry" id="launchEntry" data-toggle="modal" data-target="#entryModal">📜 Add Entry</button>
+          </div>
+        </div>
+    {{#if userEntriesData}}
             {{#each userEntriesData}}
             {{> userEntries-details}}
             {{/each}}
+    {{/if}}
+
+
+
   </div>
 
 
@@ -18,6 +31,8 @@
 
 
 {{> alert-modal}}
+
+{{> entry-modal}}
 
 
     <script src="/assets/scripts/profile.js"></script>
