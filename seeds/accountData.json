@@ -1,17 +1,17 @@
 [
   {
     "id": 1,
-    "email": "mark@example.com",
+    "username": "techsavvy",
     "password": "password12345"
   },
   {
     "id": 2,
-    "email": "john@smith.com",
+    "username": "supernerd",
     "password": "password12345"
   },
   {
     "id": 3,
-    "email": "Belina@Apice.com",
+    "username": "scriptifyer",
     "password": "password12345"
   }
 ]

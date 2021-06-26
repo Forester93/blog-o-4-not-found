@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "title": "Regular Expressions",
+    "content": "Last week I learned about Regex (or Regular Expressions). It is such a powerful tool.",
+    "date": "09/02/2021",
+    "account_id": 1
+  },
+  {
+    "id": 2,
+    "title": "MongoDB",
+    "content": "MongoDB makes it much easier to insert and modify data structures after the deployment of an application.",
+    "date": "11/02/2021",
+    "account_id": 2
+  },
+  {
+    "id": 3,
+    "title": "Bootstrap",
+    "content": "Although bootstrap makes it very easy to style an HTML page, some people still prefer to use raw CSS to add flavour to their pages.",
+    "date": "12/03/2021",
+    "account_id": 3
+  }
+]

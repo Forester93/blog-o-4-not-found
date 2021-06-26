@@ -125,198 +125,23 @@ footer {
 }
 
 /* ======================  Profile page styling ====================== */
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-.dropdown-content {
-  display: none;
-  position: absolute;
-  right: 0;
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 5px;
-  min-width: 130px;
-  z-index: 1;
-}
-.dropdown-content button {
-  font-family: "Montserrat", sans-serif;
-  color: white;
-  background-color: var(--themeColor1);
-  padding: 5px 8px;
-  text-decoration: none;
-  text-align: left;
-  display: block;
-}
-.dropdown-content button:hover {
-  color: var(--themeColor1);
-  background-color: var(--themeColor3);
-}
-.dropdown:hover .dropdown-content {
-  display: flex;
-  flex-direction: column;
-}
 
-.user {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  color: black;
-  background-size: cover;
-  background-color: #080806;
-  padding: 30px;
-  font-family: "Montserrat", sans-serif;
-}
-.box-1,
-.box-2 {
-  background-color: white;
-  border-radius: 15;
-  padding: 25px;
-  margin-bottom: 25px;
-}
-.user .box-head {
-  display: flex;
-  align-items: center;
-}
-.user .box-head img {
-  height: 80px;
-  width: 80px;
-  border-radius: 40px;
-  margin-right: 20px;
-  margin-bottom: 20px;
-}
-
-.box-1 .box-head p {
-  font-size: 25px;
-  font-weight: 600;
-}
-
-.card {
-  margin: 3vh;
-}
-
-.box-2 {
-  border-radius: 5px;
-}
-.box-2 .card .updateBtn {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 5px;
-}
-.box-2 .card .updateBtn span {
-  text-align: left;
-}
-.box-2 .card {
-  width: 350px;
-  height: 600px;
-  padding: 15px;
-  border-radius: 8px;
-  align-items: flex-start;
-  background-color: var(--themeColor3);
-  cursor: pointer;
-  overflow-y: scroll;
-  transition: all 0.3s ease;
-}
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-.box-2 .card:hover {
-  animation-duration: 0.75s;
-  animation-name: glow-black;
-  animation-timing-function: ease-out;
-  animation-fill-mode: forwards;
-}
-.box-2 .card .num {
-  width: 60px;
-  height: 60px;
-  padding: 10px;
-  text-align: center;
-  margin-bottom: 10px;
-  border-radius: 30px;
-  border: 2px dashed cadetblue;
-}
-
-.box-2 .card a {
-  margin-top: auto;
-  text-decoration: none;
-  background: var(--themeColor1);
-  color: white;
-  padding: 6px 20px;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-}
-.box-2 .card a:hover {
-  color: var(--themeColor1);
-  border: 1px solid var(--themeColor1);
-  background-color: var(--themeColor2);
-}
-
-.owl-dots {
-  text-align: center;
-  margin-top: 20px;
-}
-.owl-dot {
-  height: 13px;
-  width: 13px;
-  margin: 0 10px;
-  outline: none !important;
-  border-radius: 50%;
-  border: 2px solid var(--themeColor1) !important;
-  transition: all 0.3s ease;
-}
-.owl-dot.active {
-  width: 35px;
-  border-radius: 14px;
-}
-.owl-dot.active,
-.owl-dot:hover {
-  background: var(--themeColor1) !important;
-}
-
-.carousel {
-  max-width: 1400px;
-}
-
-.logo {
-  background-color: white;
-  padding: 1vw;
-  margin-bottom: 2vw;
-  border-radius: 5px;
-}
-
-.logo:hover {
-  animation-duration: 0.75s;
-  animation-name: glow;
-  animation-timing-function: ease-out;
-  animation-fill-mode: forwards;
-}
-/*the glow effect on the borders*/
-@keyframes glow {
-  0% {
-    box-shadow: 1.75px 1.75px 20px 1.25px rgba(255, 6, 255, 0.1);
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
   }
-  50% {
-    box-shadow: 1.75px 1.75px 20px 1.25px rgba(195, 0, 255, 0.75);
+  .box-2 .card {
+    width: 250px;
   }
-  100% {
-    box-shadow: 1.75px 1.75px 20px 1.25px rgb(255, 0, 212);
+  .logo {
+    font-size: 36px;
   }
 }
 
-@keyframes glow-black {
-  0% {
-    box-shadow: 1.75px 1.75px 20px 1.25px rgba(128, 102, 128, 0.1);
+@media (min-width: 768px) {
+  body {
+    max-width: 768px;
   }
-  50% {
-    box-shadow: 1.75px 1.75px 20px 1.25px rgba(61, 54, 63, 0.75);
-  }
-  100% {
-    box-shadow: 1.75px 1.75px 20px 1.25px rgb(14, 13, 14);
-  }
-}
-
-@media (max-width: 768px) {
   .max-width {
     width: 668px;
   }
@@ -325,14 +150,14 @@ footer {
   }
 }
 
-@media (max-width: 414px) {
-  .max-width {
-    width: 314px;
+@media (min-width: 1200px) {
+  body {
+    max-width: 100%;
   }
-  .box-2 .card {
-    width: 250px;
+  .max-width {
+    width: 668px;
   }
   .logo {
-    font-size: 36px;
+    font-size: 40px;
   }
 }

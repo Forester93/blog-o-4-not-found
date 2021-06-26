@@ -1,22 +1,12 @@
 const router = require("express").Router();
-const { Account, User } = require("../../models");
+const { Account, Entry } = require("../../models");
 
 // Route to Get All
-router.get("/", async (req, res) => {
-  try {
-    const accountData = await Account.findAll({
-      order: [["id", "ASC"]],
-    });
-    res.status(200).json(accountData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
 
 router.post("/", async (req, res) => {
   try {
     const accountData = await Account.findOne({
-      where: { email: req.body.email },
+      where: { username: req.body.username },
     });
 
     if (!accountData) {
@@ -36,7 +26,7 @@ router.post("/", async (req, res) => {
       req.session.logged_in = true;
       // console.log(req.session.account_id);
       // console.log(req.session.logged_in);
-      res.json({ account: accountData, message: "You are now logged in!" });
+      res.json({ message: "You are now logged in!" });
     });
   } catch (err) {
     res.status(400).json(err);
@@ -69,25 +59,12 @@ router.post("/create", async (req, res) => {
     const accountInfo = await Account.create(req.body);
     let account = accountInfo.get({ plain: true });
     console.log(account);
-    let newUser = await User.create({
-      id: account.id,
-      name: "Your Full Name (including Middle Names)",
-      gender: true,
-      occupation: "What you do for a living",
-      DOB: "Your date of birth",
-      casket: "Any casket instructions here",
-      ceremony: "Any ceremonial instructions here",
-      address: "Your residential address",
-      account_id: account.id,
-    });
-    newUser = newUser.get({ plain: true });
 
-    res.status(200).json("Account created!");
     req.session.save(() => {
       req.session.account_id = account.id;
       req.session.logged_in = true;
     });
-    res.redirect("../../profile");
+    res.status(200).json("Account created!").redirect("../../profile");
   } catch (err) {
     res.status(400).send(err);
   }

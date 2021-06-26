@@ -6,13 +6,13 @@ function alert(text) {
 const loginFormHandler = async (event) => {
   event.preventDefault();
 
-  const email = document.querySelector("#email-login").value.trim();
+  const username = document.querySelector("#username-login").value.trim();
   const password = document.querySelector("#password-login").value.trim();
   let response;
-  if (email && password) {
+  if (username && password) {
     response = await fetch("/api/accounts", {
       method: "POST",
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ username, password }),
       headers: { "Content-Type": "application/json" },
     });
 
@@ -27,23 +27,23 @@ const loginFormHandler = async (event) => {
 const signUpFormHandler = async (event) => {
   event.preventDefault();
 
-  const email = document.querySelector("#email-signup").value.trim();
+  const username = document.querySelector("#username-signup").value.trim();
   const password = document.querySelector("#password-signup").value.trim();
   const passwordRepeat = document
     .querySelector("#password-repeat")
     .value.trim();
   let response;
-  if (email && password && password == passwordRepeat) {
+  if (username && password && password == passwordRepeat) {
     response = await fetch("/api/accounts/create", {
       method: "POST",
-      body: JSON.stringify({ email: email, password: password }),
+      body: JSON.stringify({ username: username, password: password }),
       headers: { "Content-Type": "application/json" },
     });
 
     if (response.ok) {
       response = await fetch("/api/accounts", {
         method: "POST",
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ username, password }),
         headers: { "Content-Type": "application/json" },
       });
       if (response.ok) {
