@@ -35,7 +35,10 @@ router.get("/home", async (req, res) => {
         title: item.dataValues.title,
         content: item.dataValues.content,
         date: item.dataValues.date,
-        account: { username: item.dataValues.account.username },
+        account: {
+          username: item.dataValues.account.username,
+          id: item.dataValues.account.id,
+        },
       };
     });
     console.log(allUserEntries);
@@ -93,7 +96,10 @@ router.get("/dashboard", withAuth, async (req, res) => {
         title: item.dataValues.title,
         content: item.dataValues.content,
         date: item.dataValues.date,
-        account: { username: item.dataValues.account.username },
+        account: {
+          username: item.dataValues.account.username,
+          id: item.dataValues.account.id,
+        },
       };
     });
 

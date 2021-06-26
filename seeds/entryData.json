@@ -26,5 +26,12 @@
     "content": "MySQL provides a design-first structured query system to store, retrieve, relate and analyse your data.",
     "date": "13/03/2021",
     "account_id": 1
+  },
+  {
+    "id": 5,
+    "title": "Handlebars",
+    "content": "Handlebars provide an easy way to serve \"smart\" portions of HTML, where one can use logic and loops to customise the HTML",
+    "date": "13/03/2021",
+    "account_id": 1
   }
 ]

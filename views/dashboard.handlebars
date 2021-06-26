@@ -1,9 +1,11 @@
 
-<section class="user align-items-center">
+<section >
+  <div class="container align-items-center">
   <div class="logo">Blog <span>O4</span> ... Code Away</div>
   <h6>Welcome back, {{account.username}}</h6>
+  </div>
 
-  <div class="box-2">
+  <div class="container">
             {{#each userEntriesData}}
             {{> userEntries-details}}
             {{/each}}
@@ -18,7 +20,7 @@
 {{> alert-modal}}
 
 
-
+    <script src="/assets/scripts/profile.js"></script>
 
 
 
