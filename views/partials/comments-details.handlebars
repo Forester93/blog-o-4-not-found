@@ -4,5 +4,7 @@
             {{comment}}
             </div>
             <span class="badge text-muted">On {{date}}</span>
+            {{#if logged_in}}
             <button class="deleteComment badge bg-black px-1 rounded-pill">❌</button>
+            {{/if}}
             </li>

@@ -26,10 +26,15 @@
         </div> --}}
         <ul class="menu">
           <li><a href="/home" class="menu-btn">Home</a></li>
-          <li><a href="/dashboard" class="menu-btn" id='dashboard'>Dashboard</a></li>
-          <li><a href="/about" class="menu-btn">About</a></li>
+
+          {{!-- <li><a href="/about" class="menu-btn">About</a></li> --}}
           {{#if logged_in}}
+          <li><a href="/dashboard" class="menu-btn" id='dashboard'>Dashboard</a></li>          
           <li><a id="logout">Logout</a></li>
+          {{else}}
+          <li><a data-toggle="modal" data-target="#loginModal" class="menu-btn">Dashboard</a></li>          
+          <li><a data-toggle="modal" data-target="#signUpModal" class="menu-btn">Register</a></li>
+          <li><a data-toggle="modal" data-target="#loginModal" class="menu-btn">Login</a></li>
           {{/if}}
         </ul>
         

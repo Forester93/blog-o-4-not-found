@@ -32,7 +32,7 @@ router.get("/", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    const comments = await Comment.findByPk(req.params.id, {
+    const commentData = await Comment.findByPk(req.params.id, {
       include: [
         {
           model: Account,
@@ -40,6 +40,7 @@ router.delete("/:id", async (req, res) => {
         },
         {
           model: Entry,
+          attributes: { include: ["id"] },
           include: [
             {
               model: Account,
@@ -49,9 +50,16 @@ router.delete("/:id", async (req, res) => {
         },
       ],
     });
-    if (comments.account.id || comments.entry.account_id) {
+    const comment = commentData.get({ plain: true });
+    // console.log(comment);
+    // console.log(req.session.account_id);
+    // Check that the user either own the comment or the blog post.
+    if (
+      req.session.account_id == comment.account_id ||
+      req.session.account_id == comment.entry.account_id
+    ) {
       const deletedComment = await Comment.destroy({
-        where: { id: req.params.id },
+        where: { cid: req.params.id },
       });
       res.json(deletedComment);
     } else {

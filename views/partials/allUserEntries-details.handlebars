@@ -37,11 +37,19 @@
                 </div>  
         {{/if}}
             </li>
+        {{#if logged_in}}    
         {{#each comments}}
 
-        {{> comments-details}}
+        {{> comments-details logged_in=true}}
 
         {{/each}}
+        {{else}}
+        {{#each comments}}
+
+        {{> comments-details logged_in=false}}
+
+        {{/each}}
+        {{/if}}
     </ol>
     </div>
   </div>
