@@ -42,5 +42,8 @@
 
 {{> alert-modal}}
 
-
-    <script src="/assets/scripts/login.js"></script>
+            {{#if logged_in}}
+            <script src="/assets/scripts/home.js"></script>
+            {{else}}
+            <script src="/assets/scripts/login.js"></script>
+            {{/if}}

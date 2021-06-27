@@ -47,7 +47,7 @@ router.get("/home", async (req, res) => {
           };
         });
       }
-      console.log(comments);
+      // console.log(comments);
       return {
         id: item.dataValues.id,
         title: item.dataValues.title,
@@ -60,7 +60,7 @@ router.get("/home", async (req, res) => {
         comments,
       };
     });
-    console.log(allUserEntries);
+    // console.log(allUserEntries);
     res.render("home", {
       layout: "main",
       allUserEntries,
