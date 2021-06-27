@@ -7,6 +7,8 @@ router.get("/", (req, res) => {
   if (req.session.logged_in) {
     res.redirect("/dashboard");
     return;
+  } else {
+    res.redirect("/home");
   }
   // res.render("dashboard", {
   //   layout: "main",
@@ -38,6 +40,7 @@ router.get("/home", async (req, res) => {
       if (item.dataValues.comments) {
         comments = item.dataValues.comments.map((commentData) => {
           return {
+            cid: commentData.cid,
             comment: commentData.comment,
             username: commentData.account.username,
             date: commentData.date,
@@ -109,7 +112,7 @@ router.get("/dashboard", withAuth, async (req, res) => {
       ],
       // join other table data here later
     });
-    console.log(accountEntries);
+    // console.log(accountEntries);
     if (!accountEntries) {
       res.render("dashboard", {
         layout: "main",

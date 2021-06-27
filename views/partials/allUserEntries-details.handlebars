@@ -4,22 +4,52 @@
     <p class="card-text">{{content}}</p>
     <p class="text-muted">- {{account.username}}</p>
   </div>
-{{#if comments}}
+
     <div class="container my-2">
+        <div id="accordion">
+  <div class="card">
+    <div class="card-header bg-black" id="heading{{id}}" data-toggle="collapse" data-target="#collapse{{id}}" aria-expanded="true" aria-controls="collapse{{id}}">
+      <h5 class="mb-0">
+        <a class="btn btn-link" >
+          View Comments
+        </a>
+      </h5>
+    </div>
+
+    <div id ="collapse{{id}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
     <ol class="list-group list-group-numbered">
-        {{#each comments}}
-            <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-            <strong class="fw-bold">{{username}}</strong>
-            {{comment}}
+            <li class="list-group-item justify-content-between align-items-start">
+        {{#if logged_in}}
+        <form entry_id='{{{id}}}' id='entry{{{id}}}CommentForm' class="commentSubmit"> 
+            <div class="form-group">
+              <div class="form-outline">
+                <textarea class="form-control" id="entry{{id}}Comment" rows="2"></textarea>
+                <label class="form-label" for="entryContent"></label>
+              </div>
+            <button  class="addComment" >Add Comment</button>
             </div>
-            <span class="badge bg-primary rounded-pill">{{date}}</span>
-        </li>
+        </form>
+        {{else}}
+        <em>You need to login or sign up to add comments.</em><br><br>
+                <div>
+                  <button  data-toggle="modal" data-target="#signUpModal"><i class="fas fa-pen-fancy"></i> Sign Up</button>
+                  <button  data-toggle="modal" data-target="#loginModal"><i class="fas fa-sign-in-alt"></i></i> Sign In</button>
+                </div>  
+        {{/if}}
+            </li>
+        {{#each comments}}
+
+        {{> comments-details}}
+
         {{/each}}
     </ol>
     </div>
-{{/if}}
+  </div>
+  </div>
+
+    </div>
+
     <div class="card-footer text-muted">
-    {{date}}
+    Blog entry posted on {{date}}
   </div>
 </div>

@@ -89,7 +89,6 @@ $("#entryModalFooter").on("click", "#updateEntryBtn", updateEntry);
 
 // Functions to switch Add or Update Modal
 const entryModalToUpdate = (event) => {
-  // We need to get the target beneficiary id for update with this click
   let targetclicked = $(event.target);
   entryObjClicked = JSON.parse(targetclicked.parent().parent().attr("data"));
   entryIdClicked = entryObjClicked.id;
@@ -122,3 +121,41 @@ $(".editEntry").on("click", entryModalToUpdate);
 $(".launchEntry").on("click", entryModalToAdd);
 // $("#launchEntry").on("mouseover", entryModalToAdd);
 // $("#launchEntry").on("focus", entryModalToAdd);
+
+////////////////////////////// Adding Comments///////////////////
+
+const addComment = async (event) => {
+  event.preventDefault();
+  alert("hi");
+  let entryID = $(event.target).parent().parent().attr("entry_id");
+  const comment = $(`#entry${entryID}Comment`).val();
+  console.log({
+    entryID,
+    comment,
+    date: new Date().toString(),
+  });
+  if (entryID && comment) {
+    const response = await fetch(`/api/comments/new`, {
+      method: "POST",
+      body: JSON.stringify({
+        entry_id: entryID,
+        comment,
+        date: Date().toString(),
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      alert(
+        "Failed to add comment! Check that you are signed in or that blog post exists."
+      );
+    } else {
+      location.reload();
+    }
+  }
+};
+
+$(".addComment").on("click", addComment);
+$(".commentSubmit").on("click", ".addComment", addComment);
+$(".commentSubmit").on("submit", ".addComment", addComment);

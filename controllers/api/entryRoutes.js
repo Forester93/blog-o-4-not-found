@@ -126,7 +126,7 @@ router.put("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     req.body.account_id = req.session.account_id;
-    console.log(req.body);
+    // console.log(req.body);
     const entryNew = await Entry.create(req.body);
     // console.log(req.session.account_id);
     res.status(200).json(entryNew);
